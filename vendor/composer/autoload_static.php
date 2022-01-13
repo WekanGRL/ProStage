@@ -490,7 +490,7 @@ class ComposerStaticInit66c3f396c234e51c0764290b1cc7efab
         ),
         'Faker\\' => 
         array (
-            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+            0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
