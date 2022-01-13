@@ -59,7 +59,7 @@ class ProStageController extends AbstractController
      */
     public function detaillerStage($id): Response
     {
-        // Requête en BD consistant à récupérer toutes les formations afin de les lister.
+        // Requête en BD consistant à récupérer le stage associé à l'id en paramètres
         $stage = $this->getDoctrine()->getRepository(Stage::class)->find($id);
 
         // Passage des variables à la vue
@@ -72,7 +72,10 @@ class ProStageController extends AbstractController
      */
     public function listerStagesParEntreprise($id): Response
     {
+        // Requête en BD consistant à récupérer l'entreprise associée à l'id en paramètres
         $entreprise = $this->getDoctrine()->getRepository(Entreprise::class)->find($id);
+
+        // Passage des variables à la vue
         return $this->render('pro_stage/stagesParEntreprise.html.twig', ['entreprise'=> $entreprise]);
         
     }
@@ -82,7 +85,10 @@ class ProStageController extends AbstractController
      */
     public function listerStagesParFormation($id): Response
     {
+        // Requête en BD consistant à récupérer la formation associée à l'id en paramètres
         $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+
+        // Passage des variables à la vue
         return $this->render('pro_stage/stagesParFormation.html.twig', ['formation'=> $formation]);
     }
 
