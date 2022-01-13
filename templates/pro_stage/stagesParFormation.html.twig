@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+
+    <div>
+        <h1>Stages proposés pour {{formation.nomCourt}} :</h1>
+        <div class="card">
+            <div>
+                <h3>Nom long de {{formation.nomCourt}}</h3>
+                <p>{{ formation.nomLong }}</p>
+            </div>
+
+            <div>
+                {% for stage in formation.stages %}
+                    <td><a href="{{path('pro_stage_stages', {id:stage.id})}}">{{ stage.titre }}</a></td>
+                    <br/>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

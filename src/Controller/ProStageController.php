@@ -5,6 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Entreprise;
+use App\Entity\Stage;
+use App\Entity\Formation;
+use App\Repository\StageRepository;
+use App\Repository\EntrepriseRepository;
+use App\Repository\FormationRepository;
 
 class ProStageController extends AbstractController
 {
@@ -13,73 +19,71 @@ class ProStageController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('pro_stage/index.html.twig');
+
+        /// PAGE D'ACCUEIL DE L'APPLICATION PROSTAGE ///
+
+        // Requête en BD consistant à récupérer tous les stages afin de les lister.
+        $stages = $this->getDoctrine()->getRepository(Stage::class)->findAll();
+
+        // Passage des variables à la vue
+        return $this->render('pro_stage/index.html.twig',['stages'=>$stages]);
     }
 
     /**
-     * @Route("/entreprises", name="pro_stage_listeEntreprises")
+     * @Route("/entreprises", name="pro_stage_entreprises")
      */
-    public function listeEntreprises(): Response
+    public function listerEntreprises(): Response
     {
-        return $this->render('pro_stage/listeEntreprises.html.twig');
+        // Requête en BD consistant à récupérer toutes les entreprises afin de les lister.
+        $entreprises = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
+
+        // Passage des variables à la vue
+        return $this->render('pro_stage/listeEntreprises.html.twig',['entreprises'=>$entreprises]);
     }
 
     /**
-     * @Route("/formations", name="pro_stage_listeFormations")
+     * @Route("/formations", name="pro_stage_formations")
      */
-    public function listeFormations(): Response
+    public function listerFormations(): Response
     {
-        return $this->render('pro_stage/listeFormations.html.twig');
-    }
+        // Requête en BD consistant à récupérer toutes les formations afin de les lister.
+        $formations = $this->getDoctrine()->getRepository(Formation::class)->findAll();
 
-    /**
-     * @Route("/stages", name="pro_stage_listeStages")
-     */
-    public function listeStages(): Response
-    {
-        return $this->render('pro_stage/listeStages.html.twig');
-    }
-
-    /**
-     * @Route("/stages/{id}", name="pro_stage_stages")
-     */
-    public function detailStage($id): Response
-    {
-        return $this->render('pro_stage/stages.html.twig', [
-            'id_stage' => $id,
-        ]);
-    }
-
-    /**
-     * @Route("/stages/entreprises", name="pro_stage_entreprisesStagePropose")
-     */
-    public function entreprisesStagePropose(): Response
-    {
-        // à compléter
-    }
-
-    /**
-     * @Route("/stages/entreprise", name="pro_stage_stages")
-     */
-    public function stagesParEntreprise(): Response
-    {
-        // à compléter
+        // Passage des variables à la vue
+        return $this->render('pro_stage/listeFormations.html.twig',['formations'=>$formations]);
+        
     }
 
     /**
      * @Route("/stages/{id}", name="pro_stage_stages")
      */
-    public function formationsStagePropose(): Response
+    public function detaillerStage($id): Response
     {
-        // à compléter
+        // Requête en BD consistant à récupérer toutes les formations afin de les lister.
+        $stage = $this->getDoctrine()->getRepository(Stage::class)->find($id);
+
+        // Passage des variables à la vue
+        return $this->render('pro_stage/stages.html.twig',['stage'=>$stage]);
+    }
+
+
+    /**
+     * @Route("/stages/entreprise/{id}", name="pro_stage_stagesParEntreprise")
+     */
+    public function listerStagesParEntreprise($id): Response
+    {
+        $entreprise = $this->getDoctrine()->getRepository(Entreprise::class)->find($id);
+        return $this->render('pro_stage/stagesParEntreprise.html.twig', ['entreprise'=> $entreprise]);
+        
     }
 
     /**
-     * @Route("/stages/{id}", name="pro_stage_stages")
+     * @Route("/stages/formation/{id}", name="pro_stage_stagesParFormation")
      */
-    public function stagesParFormation(): Response
+    public function listerStagesParFormation($id): Response
     {
-        // à compléter
+        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        return $this->render('pro_stage/stagesParFormation.html.twig', ['formation'=> $formation]);
     }
 
     

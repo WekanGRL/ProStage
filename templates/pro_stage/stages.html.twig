@@ -1,5 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block contenu %}
-<h1> Cette page affichera le descriptif du stage ayant pour identifiant {{ id_stage }} </h1>
-{% endblock %}
 
+    <div>
+        <h1> Détail du stage {{stage.titre}}</h1>
+        <div class="card">
+            <div>
+                <h3>Description de {{stage.titre}}</h3>
+                <p>{{ stage.description }}</p>
+            </div>
+
+            <div>
+                <h3>Email contact {{stage.titre}}</h3>
+                <p>{{ stage.emailContact }}</p>
+            </div>
+
+            <div>
+                <h3> Ce stage vous est proposé par : </h3>
+                <p> <a href="{{path('pro_stage_stagesParEntreprise', {id:stage.entreprises.id})}}">{{stage.entreprises.nom}}</a> </p>
+            </div>
+            
+
+            <div>
+                <h3> Ce stage concerne : </h3>
+                {% for formation in stage.formations %}
+                    <p> <a href="{{path('pro_stage_stagesParFormation', {id:formation.id})}}">{{formation.nomCourt}}</a> </p>
+                {% endfor %}
+            </div>
+
+            
+
+        </div>
+    </div>
+
+{% endblock %}

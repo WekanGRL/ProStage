@@ -19,22 +19,36 @@
     </head>
     <body>
         <div class="container-fluid">
-        {% block titre %} 
-        <div class="row">
-		    <div class="col-md-12">
-                <center>
-			    <h1>
-				    <a href="{{path('pro_stage_accueil')}}"> <i class="icon-home"></i> ProStage </a>
-			    </h1>
-		    </div>
-	    </div>
+        {% block titre %}
+        <div style="border: 3px solid #D22B2B">
+            <div class="row">
+		        <div class="col-md-12">
+                    <center>
+			        <h1>
+				        <a href="{{path('pro_stage_accueil')}}"> <i class="icon-home"></i> ProStage </a>
+			        </h1>
+		        </div>
+	        </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <center>
+                    <a href="{{path('pro_stage_entreprises')}}" style="color: #0bbcf7"><i class="icon-sort-alt-up"></i>Filtrer par entreprise</a>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <center>
+                    <a href="{{path('pro_stage_formations')}}" style="color: #0bbcf7"><i class="icon-sort-alt-up"></i>Filtrer par formation</a>
+                </div>
+            </div>
+        </div>
+
         {% endblock %}
 
         {% block contenu %}
         {% endblock %}
     
         {% block footer %}
-        	<div class="row">
+        	<div class="row" style="background-color: #D22B2B; border: 3px solid black; color: black; bottom:0">
 		        <div class="col-md-4">
                     <p>IUT de Bayonne et du Pays Basque</p>
                     

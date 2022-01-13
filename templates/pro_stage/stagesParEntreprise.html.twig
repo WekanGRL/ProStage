@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+
+    <div>
+        <h1>Stages proposés par {{entreprise.nom}} :</h1>
+        <div class="card">
+            <div>
+                <h3>Activité de {{entreprise.nom}}</h3>
+                <p>{{ entreprise.activite }}</p>
+            </div>
+
+            <div>
+                <h3>Adresse de {{entreprise.nom}}</h3>
+                <p>{{ entreprise.adresse }}</p>
+            </div>
+
+            <div>
+                <h3>URL de {{entreprise.nom}}</h3>
+                <p>{{ entreprise.urlsite }}</p>
+            </div>
+
+            <div>
+                {% for stage in entreprise.stages %}
+                    <td><a href="{{path('pro_stage_stages', {id:stage.id})}}">{{ stage.titre }}</a></td>
+                    <br/>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
