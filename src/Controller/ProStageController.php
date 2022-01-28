@@ -68,15 +68,15 @@ class ProStageController extends AbstractController
 
 
     /**
-     * @Route("/stages/entreprise/{id}", name="pro_stage_stagesParEntreprise")
+     * @Route("/stages/entreprise/{nom}", name="pro_stage_stagesParNomEntreprise")
      */
-    public function listerStagesParEntreprise($id): Response
+    public function listerStagesParNomEntreprise($nom): Response
     {
         // Requête en BD consistant à récupérer l'entreprise associée à l'id en paramètres
-        $entreprise = $this->getDoctrine()->getRepository(Entreprise::class)->find($id);
+        $stagesParNomEntreprise = $this->getDoctrine()->getRepository(Stage::class)->findByNomEntreprise($nom);
 
         // Passage des variables à la vue
-        return $this->render('pro_stage/stagesParEntreprise.html.twig', ['entreprise'=> $entreprise]);
+        return $this->render('pro_stage/stagesParNomEntreprise.html.twig', ['stagesParNomEntreprise'=> $stagesParNomEntreprise, 'nomEntreprise' => $nom]);
         
     }
 
@@ -91,6 +91,9 @@ class ProStageController extends AbstractController
         // Passage des variables à la vue
         return $this->render('pro_stage/stagesParFormation.html.twig', ['formation'=> $formation]);
     }
+
+
+    
 
     
 }
