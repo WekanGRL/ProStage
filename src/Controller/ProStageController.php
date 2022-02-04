@@ -68,7 +68,7 @@ class ProStageController extends AbstractController
 
 
     /**
-     * @Route("/stages/entreprise/{nom}", name="pro_stage_stagesParNomEntreprise")
+     * @Route("/stages/entreprise/{nom}", name="pro_stage_stages_par_nom_entreprise")
      */
     public function listerStagesParNomEntreprise($nom): Response
     {
@@ -81,15 +81,15 @@ class ProStageController extends AbstractController
     }
 
     /**
-     * @Route("/stages/formation/{id}", name="pro_stage_stagesParFormation")
+     * @Route("/stages/formation/{nom}", name="pro_stage_stages_par_nom_formation")
      */
-    public function listerStagesParFormation($id): Response
+    public function listerStagesParFormation($nom): Response
     {
         // Requête en BD consistant à récupérer la formation associée à l'id en paramètres
-        $formation = $this->getDoctrine()->getRepository(Formation::class)->find($id);
+        $stagesParNomFormation = $this->getDoctrine()->getRepository(Stage::class)->findByNomFormation($nom);
 
         // Passage des variables à la vue
-        return $this->render('pro_stage/stagesParFormation.html.twig', ['formation'=> $formation]);
+        return $this->render('pro_stage/stagesParFormation.html.twig', ['stagesParNomFormation'=> $stagesParNomFormation, 'nomFormation' => $nom]);
     }
 
 

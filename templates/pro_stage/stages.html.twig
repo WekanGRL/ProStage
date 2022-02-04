@@ -16,14 +16,14 @@
 
             <div>
                 <h3> Ce stage vous est proposé par : </h3>
-                <p> <a href="{{path('pro_stage_stagesParNomEntreprise', {nom:stage.entreprises.nom})}}">{{stage.entreprises.nom}}</a> </p>
+                <p> <a href="{{path('pro_stage_stages_par_nom_entreprise', {nom:stage.entreprises.nom})}}">{{stage.entreprises.nom}}</a> </p>
             </div>
             
 
             <div>
                 <h3> Ce stage concerne : </h3>
                 {% for formation in stage.formations %}
-                    <p> <a href="{{path('pro_stage_stagesParFormation', {id:formation.id})}}">{{formation.nomCourt}}</a> </p>
+                    <p> <a href="{{path('pro_stage_stages_par_nom_formation', {nom:formation.nomCourt})}}">{{formation.nomCourt}}</a> </p>
                 {% endfor %}
             </div>
 

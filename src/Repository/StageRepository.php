@@ -31,6 +31,23 @@ class StageRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    /**
+     * @return Stage[] retourne un tableau de Stages en fonction du nom d'une formation donnée
+     */
+    public function findByNomFormation($nom){
+        // Récupération du gestionnaire d'entités
+        $gestionnaireEntite = $this->getEntityManager();
+
+        // Construction de la requête
+        $requete = $gestionnaireEntite->createQuery(
+            "SELECT s
+            FROM App\Entity\Stage s
+            JOIN s.formations f
+            WHERE f.nomCourt = '$nom'");
+            
+        return $requete->execute();
+    }
+
     // /**
     //  * @return Stage[] Returns an array of Stage objects
     //  */
