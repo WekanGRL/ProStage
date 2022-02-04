@@ -18,13 +18,13 @@ class ProStageController extends AbstractController
     /**
      * @Route("/", name="pro_stage_accueil")
      */
-    public function index(): Response
+    public function index(StageRepository $stageRepository): Response
     {
 
         /// PAGE D'ACCUEIL DE L'APPLICATION PROSTAGE ///
 
         // Requête en BD consistant à récupérer tous les stages afin de les lister.
-        $stages = $this->getDoctrine()->getRepository(Stage::class)->findAll();
+        $stages = $stageRepository->findAll();
 
         // Passage des variables à la vue
         return $this->render('pro_stage/index.html.twig',['stages'=>$stages]);
@@ -33,10 +33,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/entreprises", name="pro_stage_entreprises")
      */
-    public function listerEntreprises(): Response
+    public function listerEntreprises(EntrepriseRepository $entrepriseRepository): Response
     {
         // Requête en BD consistant à récupérer toutes les entreprises afin de les lister.
-        $entreprises = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
+        $entreprises = $entrepriseRepository->findAll();
 
         // Passage des variables à la vue
         return $this->render('pro_stage/listeEntreprises.html.twig',['entreprises'=>$entreprises]);
@@ -45,10 +45,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/formations", name="pro_stage_formations")
      */
-    public function listerFormations(): Response
+    public function listerFormations(FormationRepository $formationRepository): Response
     {
         // Requête en BD consistant à récupérer toutes les formations afin de les lister.
-        $formations = $this->getDoctrine()->getRepository(Formation::class)->findAll();
+        $formations = $formationRepository->findAll();
 
         // Passage des variables à la vue
         return $this->render('pro_stage/listeFormations.html.twig',['formations'=>$formations]);
@@ -58,10 +58,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/stages/{id}", name="pro_stage_stages")
      */
-    public function detaillerStage($id): Response
+    public function detaillerStage(StageRepository $stageRepository, $id): Response
     {
         // Requête en BD consistant à récupérer le stage associé à l'id en paramètres
-        $stage = $this->getDoctrine()->getRepository(Stage::class)->find($id);
+        $stage = $stageRepository->find($id);
 
         // Passage des variables à la vue
         return $this->render('pro_stage/stages.html.twig',['stage'=>$stage]);
@@ -71,10 +71,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/stages/entreprise/{nom}", name="pro_stage_stages_par_nom_entreprise")
      */
-    public function listerStagesParNomEntreprise($nom): Response
+    public function listerStagesParNomEntreprise(StageRepository $stageRepository ,$nom): Response
     {
         // Requête en BD consistant à récupérer l'entreprise associée à l'id en paramètres
-        $stagesParNomEntreprise = $this->getDoctrine()->getRepository(Stage::class)->findByNomEntreprise($nom);
+        $stagesParNomEntreprise = $stageRepository->findByNomEntreprise($nom);
 
         // Passage des variables à la vue
         return $this->render('pro_stage/stagesParNomEntreprise.html.twig', ['stagesParNomEntreprise'=> $stagesParNomEntreprise, 'nomEntreprise' => $nom]);
@@ -84,10 +84,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/stages/formation/{nom}", name="pro_stage_stages_par_nom_formation")
      */
-    public function listerStagesParFormation($nom): Response
+    public function listerStagesParFormation(StageRepository $stageRepository, $nom): Response
     {
         // Requête en BD consistant à récupérer la formation associée à l'id en paramètres
-        $stagesParNomFormation = $this->getDoctrine()->getRepository(Stage::class)->findByNomFormation($nom);
+        $stagesParNomFormation = $stageRepository->findByNomFormation($nom);
 
         // Passage des variables à la vue
         return $this->render('pro_stage/stagesParFormation.html.twig', ['stagesParNomFormation'=> $stagesParNomFormation, 'nomFormation' => $nom]);
