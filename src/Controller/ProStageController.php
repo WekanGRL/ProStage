@@ -11,6 +11,7 @@ use App\Entity\Formation;
 use App\Repository\StageRepository;
 use App\Repository\EntrepriseRepository;
 use App\Repository\FormationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProStageController extends AbstractController
 {
@@ -90,6 +91,26 @@ class ProStageController extends AbstractController
 
         // Passage des variables à la vue
         return $this->render('pro_stage/stagesParFormation.html.twig', ['stagesParNomFormation'=> $stagesParNomFormation, 'nomFormation' => $nom]);
+    }
+
+    /**
+     * @Route("/nouvelleEntreprise", name="pro_stage_nouvelle_entreprise")
+     */
+    public function ajouterNouvEntreprise(): Response
+    {
+        // Création d'une nouvelle entreprise initialement vierge
+        $entreprise = new Entreprise();
+
+        // Création d'un objet formulaire pour ajouter une entreprise
+        $formulaireEntreprise = $this -> createFormBuilder($entreprise)
+                                      -> add('nom')
+                                      -> add('activite')
+                                      -> add('adresse')
+                                      -> add('urlsite')
+                                      -> getForm();
+        // Afficher la page d'ajout d'une entreprise
+   
+        return $this->render('pro_stage/nouvEntreprise.html.twig',['vueFormulaireEntreprise' => $formulaireEntreprise -> createView()]);
     }
 
 
