@@ -20,7 +20,6 @@ class ProStageController extends AbstractController
      */
     public function index(StageRepository $stageRepository): Response
     {
-
         /// PAGE D'ACCUEIL DE L'APPLICATION PROSTAGE ///
 
         // Requête en BD consistant à récupérer tous les stages afin de les lister.

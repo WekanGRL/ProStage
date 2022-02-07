@@ -59,6 +59,7 @@ class StageRepository extends ServiceEntityRepository
     public function findAllStagesAvecEntreprise(){
         // Requête avec QueryBuilder
         return $this    ->createQueryBuilder('s')
+                        ->select('s,e')
                         ->join('s.entreprises','e')
                         ->getQuery()
                         ->getResult();

@@ -2,17 +2,26 @@
 
 {% block contenu %}
     
-    <h1> <center> Bienvenue sur la page d'accueil de Prostages </h1>
+    <h1 style="color:green"> <b><u><center> Bienvenue sur la page d'accueil de ProStage </b></u></h1>
+        <div class="row">
+            <div class="col-md-2">
+                <center>
+			    <h5>
+				    <a href="{{path('pro_stage_nouvelle_entreprise')}}"> <i class="icon-plus-circled"></i> <b>Nouvelle entreprise</b> </a>
+			    </h5>
+		    </div>
+        </div>
+
     <table class="table table-hover">
         <thead>
             <tr>
                 <div class="row">
                     <div class="col-md-6 col-xs-12">
-                        <td>Titre du stage</td>
+                        <td style="font-size:25px"><b><u>Titre du stage</u></b></td>
                     </div>
 
                     <div class="col-md-6 col-xs-12">
-                        <td>Descriptif du stage</td>
+                        <td style="font-size:25px"><b><u>Descriptif du stage</u></b></td>
                     </div>
                 </div>
             </tr>
