@@ -24,10 +24,10 @@ class ProStageController extends AbstractController
         /// PAGE D'ACCUEIL DE L'APPLICATION PROSTAGE ///
 
         // Requête en BD consistant à récupérer tous les stages afin de les lister.
-        $stages = $stageRepository->findAll();
+        $stagesAvecEntreprise = $stageRepository->findAllStagesAvecEntreprise();
 
         // Passage des variables à la vue
-        return $this->render('pro_stage/index.html.twig',['stages'=>$stages]);
+        return $this->render('pro_stage/index.html.twig',['stagesAvecEntreprise'=>$stagesAvecEntreprise]);
     }
 
     /**

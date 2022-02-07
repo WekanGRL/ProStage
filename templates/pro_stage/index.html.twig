@@ -18,16 +18,16 @@
             </tr>
         </thead>
 
-        {% for stage in stages %}
+        {% for stageCourant in stagesAvecEntreprise %}
             <tbody>
                 <tr>
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
-                            <td><a href="{{path('pro_stage_stages', {id:stage.id})}}">{{ stage.titre }}</a></td> 
+                            <td><a href="{{path('pro_stage_stages', {id:stageCourant.id})}}">{{ stageCourant.titre }} -- {{stageCourant.entreprises.nom}} </a></td> 
                         </div>
 
                         <div class="col-md-6 col-xs-12">
-                            <td>{{ stage.description }}</td>
+                            <td>{{ stageCourant.description }}</td>
                         </div>
                     </div>
                 </tr>

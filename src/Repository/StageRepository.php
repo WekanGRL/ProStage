@@ -20,9 +20,12 @@ class StageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Stage[] Retourne un tableau de Stages en fonction du nom d'une entreprise donnée
+     * @return Stage[] Retourne un tableau d'Objets Stage en fonction du nom d'une entreprise donnée
      */
     public function findByNomEntreprise($nom){
+        // Requête avec QueryBuilder
+
+
         return $this->createQueryBuilder('s')
                     ->join('s.entreprises','e')
                     ->andWhere('e.nom = :nomEntreprise')
@@ -32,9 +35,11 @@ class StageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Stage[] retourne un tableau de Stages en fonction du nom d'une formation donnée
+     * @return Stage[] retourne un tableau d'Objets Stage en fonction du nom d'une formation donnée
      */
     public function findByNomFormation($nom){
+        // Requête avec DQL
+
         // Récupération du gestionnaire d'entités
         $gestionnaireEntite = $this->getEntityManager();
 
@@ -46,6 +51,18 @@ class StageRepository extends ServiceEntityRepository
             WHERE f.nomCourt = '$nom'");
             
         return $requete->execute();
+    }
+
+    /**
+     * @return Stage[] retourne un tableau d'Objets Stage et d'Objets Entreprise liés à ces stages.
+     */
+    public function findAllStagesAvecEntreprise(){
+        // Requête avec QueryBuilder
+        return $this    ->createQueryBuilder('s')
+                        ->join('s.entreprises','e')
+                        ->getQuery()
+                        ->getResult();
+        
     }
 
     // /**
