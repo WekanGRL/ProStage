@@ -2,7 +2,12 @@
 {% block contenu %}
 
     <div>
-        <h1>Stages proposés par {{nomEntreprise}} :</h1>
+        <div class="row">        
+
+            <h1>Stages proposés par {{nomEntreprise}} :</h1>
+
+        </div>
+
         <div class="card">
             <div>
                 {% for stageCourant in stagesParNomEntreprise %}

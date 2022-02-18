@@ -19,8 +19,16 @@
                 <tbody>
                     <tr>
                         <div class="row">
-                            <div class="col-md-12">
-                                <td><a href="{{path('pro_stage_stages_par_nom_entreprise', {nom:entreprise.nom})}}">{{entreprise.nom}}</a></td> 
+                            <div class="col-md-8">
+                                <td><a href="{{path('pro_stage_stages_par_nom_entreprise', {nom:entreprise.nom})}}">{{entreprise.nom}}</a></td>
+                            </div>
+                            <div class="col-md-4 col-md-offset-8">
+                                <td> 
+                                    <a href="{{path('pro_stage_modifier_entreprise', {id:entreprise.id})}}"> 
+                                        <i class="icon-plus-circled"></i> 
+                                        <b>Modifier Entreprise</b> 
+                                    </a>
+                                </td>
                             </div>
                         </div>
                     </tr>
