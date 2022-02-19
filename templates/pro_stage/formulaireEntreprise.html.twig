@@ -4,9 +4,15 @@
         <h1> AJOUT D'UNE ENTREPRISE </h1>
 
     <div class="row">
-    <center>
         <div class="col-md-12">
-            {{form(vueFormulaireEntreprise)}}
+            {{ form_start ( vueFormulaireEntreprise ) }}
+                {{ form_row ( vueFormulaireEntreprise.nom )}}
+                {{ form_row ( vueFormulaireEntreprise.activite )}}
+                {{ form_row ( vueFormulaireEntreprise.adresse )}}
+                {{ form_row ( vueFormulaireEntreprise.urlsite )}}
+                <button type="submit" class="btn btn-dark"> Valider </button>
+            {{ form_end ( vueFormulaireEntreprise )}}
+
         </div>    
     </div>
 

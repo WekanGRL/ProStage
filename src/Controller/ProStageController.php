@@ -2,25 +2,24 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Entreprise;
+use App\Entity\Formation;
+use App\Entity\Stage;
+use App\Repository\EntrepriseRepository;
+use App\Repository\FormationRepository;
+use App\Repository\StageRepository;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 
-use App\Entity\Entreprise;
-use App\Entity\Stage;
-use App\Entity\Formation;
-
-use App\Repository\StageRepository;
-use App\Repository\EntrepriseRepository;
-use App\Repository\FormationRepository;
-
-
-use Doctrine\ORM\EntityManagerInterface;
 
 class ProStageController extends AbstractController
 {
@@ -102,9 +101,9 @@ class ProStageController extends AbstractController
     }
 
     /**
-     * @Route("/nouvelleEntreprise", name="pro_stage_nouvelle_entreprise")
+     * @Route("/entreprises/new", name="pro_stage_nouvelle_entreprise")
      */
-    public function ajouterNouvEntreprise(): Response
+    public function ajouterNouvEntreprise(Request $requeteHttp, EntityManagerInterface $manager): Response
     {
         // Création d'une nouvelle entreprise initialement vierge
         $entreprise = new Entreprise();
@@ -116,26 +115,56 @@ class ProStageController extends AbstractController
                                         -> add('adresse', TextareaType::class)
                                         -> add('urlsite', UrlType::class)
                                         -> getForm();
-        // Afficher la page d'ajout d'une entreprise
-   
-        return $this->render('pro_stage/formulaireEntreprise.html.twig',['vueFormulaireEntreprise' => $formulaireEntreprise -> createView()]);
+
+        // Récupération des données dans $entreprise si elles ont été soumises
+        $formulaireEntreprise->handleRequest($requeteHttp);
+
+        // Traiter les données du formulaire s'il a été soumis
+        if($formulaireEntreprise->isSubmitted()){
+            // Enregistrer l'entreprise en BD
+            $manager->persist ($entreprise);
+            $manager->flush();
+
+            // Rediriger l’utilisateur vers la page affichant la liste des entreprises
+            return $this->redirectToRoute('pro_stage_entreprises');
+        }
+
+
+        // Afficher le formulaire dédié à une entreprise  
+        return $this->render('pro_stage/formulaireEntreprise.html.twig',
+                            ['vueFormulaireEntreprise' => $formulaireEntreprise->createView()]);
     }
 
     /**
      * @Route("/entreprises/modifier/{id}", name="pro_stage_modifier_entreprise")
      */
-    public function modifierEntreprise(Entreprise $entreprise): Response
+    public function modifierEntreprise(Request $requeteHttp, EntityManagerInterface $manager, Entreprise $entreprise): Response
     {
-        // Création d'un objet formulaire pour ajouter une entreprise
+        // Création d'un objet formulaire pour modifier l'entreprise donnée en paramètres
         $formulaireEntreprise = $this   -> createFormBuilder($entreprise)
                                         -> add('nom', TextType::class)
                                         -> add('activite', TextareaType::class)
                                         -> add('adresse', TextareaType::class)
                                         -> add('urlsite', UrlType::class)
                                         -> getForm();
-        // Afficher la page d'ajout d'une entreprise
-   
-        return $this->render('pro_stage/formulaireEntreprise.html.twig',['vueFormulaireEntreprise' => $formulaireEntreprise -> createView()]);
+
+        // Récupération des données dans $entreprise si elles ont été soumises
+        $formulaireEntreprise->handleRequest($requeteHttp);
+
+        // Traiter les données du formulaire s'il a été soumis
+        if($formulaireEntreprise->isSubmitted()){
+            // Enregistrer l'entreprise en BD
+            $manager->persist ($entreprise);
+            $manager->flush();
+        
+            // Rediriger l’utilisateur vers la page affichant la liste des entreprises
+            return $this->redirectToRoute('pro_stage_entreprises');
+        }
+
+
+        // Afficher le formulaire dédié à une entreprise   
+        return $this->render('pro_stage/formulaireEntreprise.html.twig',
+                            ['vueFormulaireEntreprise' => $formulaireEntreprise->createView()]);
     }
 
 

@@ -2,7 +2,19 @@
 
 {% block contenu %}
     
-    <h1> <center> Bienvenue sur la page d'accueil de Prostages </h1>
+    <h1> <center> Liste des entreprises proposant des stages : </h1>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+            <h5>
+				<a href="{{path('pro_stage_nouvelle_entreprise')}}"> 
+                    <i class="icon-plus-circled"></i>
+                    <b>Nouvelle entreprise</b> 
+                </a>
+			</h5>
+		</div>
+    </div>
+
     <table class="table table-hover">
         <thead>
             <tr>
