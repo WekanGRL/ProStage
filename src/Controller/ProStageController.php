@@ -3,14 +3,23 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+
+
 use App\Entity\Entreprise;
 use App\Entity\Stage;
 use App\Entity\Formation;
+
 use App\Repository\StageRepository;
 use App\Repository\EntrepriseRepository;
 use App\Repository\FormationRepository;
+
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProStageController extends AbstractController
@@ -101,12 +110,12 @@ class ProStageController extends AbstractController
         $entreprise = new Entreprise();
 
         // Création d'un objet formulaire pour ajouter une entreprise
-        $formulaireEntreprise = $this -> createFormBuilder($entreprise)
-                                      -> add('nom')
-                                      -> add('activite')
-                                      -> add('adresse')
-                                      -> add('urlsite')
-                                      -> getForm();
+        $formulaireEntreprise = $this   -> createFormBuilder($entreprise)
+                                        -> add('nom', TextType::class)
+                                        -> add('activite', TextareaType::class)
+                                        -> add('adresse', TextareaType::class)
+                                        -> add('urlsite', UrlType::class)
+                                        -> getForm();
         // Afficher la page d'ajout d'une entreprise
    
         return $this->render('pro_stage/formulaireEntreprise.html.twig',['vueFormulaireEntreprise' => $formulaireEntreprise -> createView()]);
@@ -118,12 +127,12 @@ class ProStageController extends AbstractController
     public function modifierEntreprise(Entreprise $entreprise): Response
     {
         // Création d'un objet formulaire pour ajouter une entreprise
-        $formulaireEntreprise = $this -> createFormBuilder($entreprise)
-                                      -> add('nom')
-                                      -> add('activite')
-                                      -> add('adresse')
-                                      -> add('urlsite')
-                                      -> getForm();
+        $formulaireEntreprise = $this   -> createFormBuilder($entreprise)
+                                        -> add('nom', TextType::class)
+                                        -> add('activite', TextareaType::class)
+                                        -> add('adresse', TextareaType::class)
+                                        -> add('urlsite', UrlType::class)
+                                        -> getForm();
         // Afficher la page d'ajout d'une entreprise
    
         return $this->render('pro_stage/formulaireEntreprise.html.twig',['vueFormulaireEntreprise' => $formulaireEntreprise -> createView()]);
