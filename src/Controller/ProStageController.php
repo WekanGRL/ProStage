@@ -120,7 +120,7 @@ class ProStageController extends AbstractController
         $formulaireEntreprise->handleRequest($requeteHttp);
 
         // Traiter les données du formulaire s'il a été soumis
-        if($formulaireEntreprise->isSubmitted()){
+        if($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid()){
             // Enregistrer l'entreprise en BD
             $manager->persist ($entreprise);
             $manager->flush();
@@ -152,7 +152,7 @@ class ProStageController extends AbstractController
         $formulaireEntreprise->handleRequest($requeteHttp);
 
         // Traiter les données du formulaire s'il a été soumis
-        if($formulaireEntreprise->isSubmitted()){
+        if($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid()){
             // Enregistrer l'entreprise en BD
             $manager->persist ($entreprise);
             $manager->flush();

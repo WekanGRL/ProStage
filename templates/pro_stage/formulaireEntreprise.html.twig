@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {{ form_start ( vueFormulaireEntreprise ) }}
+            {{ form_start ( vueFormulaireEntreprise, { 'attr': { 'novalidate': 'novalidate' }} ) }}
                 {{ form_row ( vueFormulaireEntreprise.nom )}}
                 {{ form_row ( vueFormulaireEntreprise.activite )}}
                 {{ form_row ( vueFormulaireEntreprise.adresse )}}
