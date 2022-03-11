@@ -34,21 +34,21 @@ class Entreprise
      *
      * @Assert\NotBlank(
      *  message = "L'adresse de l'entreprise doit être renseignée"
+     * ) 
+     *   
+     * @Assert\Regex(
+     *  pattern = "#^[1-999]( ?bis)?#",
+     *  message =  "Le numéro de route/voie semble incorrect"
      * )
      * 
      * @Assert\Regex(
-     *  pattern="#^[1-9][0-9]{0-2}( ?bis)? #"
-     *  message="Le numéro de route/voie semble incorrect"
+     *  pattern = "#route|rue|boulevard|avenue|impasse|voie|allée|place#i",
+     *  message = "le type de route/voie semble incorrect"
      * )
      * 
      * @Assert\Regex(
-     *  pattern="#route|rue|boulevard|avenue|impasse|voie|allée|place#i",
-     *  message="le type de route/voie semble incorrect"
-     * )
-     * 
-     * @Assert\Regex(
-     *  pattern="# [0-9]{5} #",
-     *  message="Le code postal semble erroné"
+     *  pattern = "# [0-9]{5} #",
+     *  message = "Le code postal semble erroné"
      * )
      */
     private $adresse;
