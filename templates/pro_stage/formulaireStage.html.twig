@@ -1,18 +1,107 @@
 {% extends 'base.html.twig' %}
 {% block contenu %}
-        <h1> AJOUT DE STAGE </h1>
 
     <div class="row">
-        <div class="col-md-12">
-            {{ form_start ( vueFormulaireStage) }}
-                {{ form_row ( vueFormulaireStage.titre )}}
-                {{ form_row ( vueFormulaireStage.description )}}
-                {{ form_row ( vueFormulaireStage.emailContact )}}
-                {{ form_row ( vueFormulaireStage.entreprises )}}
-                {{ form_row (vueFormulaireStage.formations )}}
-                <button type="submit" class="btn btn-dark"> Valider </button>
-            {{ form_end ( vueFormulaireStage )}}
+        <div class="col-md-2 offset-md-5" style="color:green; font-size:25px; margin-bottom:25px;">
+            <u><b> Ajout d'un stage</b></u>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-6">            
+            <div style="border:5px solid green; padding:50px; color:green;">        
+                {{ form_start ( vueFormulaireStage ) }}
+                    <div style="border:3px solid green; margin-bottom:25px;">
+                        <div class="row" style="color:green; margin-bottom:50px; margin-top:50px; margin-left:25px;">                        
+                            <div class="offset-md-1 col-md-3">
+                                    Titre du stage :
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.titre) }}
+                                {{ form_widget(vueFormulaireStage.titre) }}
+                            </div>
+                        </div>
+                        <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                Description du stage :
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.description) }}
+                                {{ form_widget(vueFormulaireStage.description) }}
+                            </div>
+                        </div>
+                        <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                Email de contact :
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.emailContact) }}
+                                {{ form_widget(vueFormulaireStage.emailContact) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:3px solid green; margin-bottom:25px;">
 
+                        <div class="row" style="color:green; margin-bottom:15px; font-size:20px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                Entreprise :
+                            </div>
+                        </div>
+                        <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                    Nom de l'entreprise :
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.entreprises.nom) }}
+                                {{ form_widget(vueFormulaireStage.entreprises.nom) }}
+                            </div>
+                        </div>
+                        <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                Activité de l'entreprise :
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.entreprises.activite) }}
+                                {{ form_widget(vueFormulaireStage.entreprises.activite) }}
+                            </div>
+                        </div>
+                        <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                Adresse de l'entreprise :
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.entreprises.adresse) }}
+                                {{ form_widget(vueFormulaireStage.entreprises.adresse) }}
+                            </div>
+                        </div>
+                        <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-3">
+                                URL du site de l'entreprise :                            
+                            </div>
+                            <div class="offset-md-1 col-md-3">
+                                {{ form_errors(vueFormulaireStage.entreprises.urlsite) }}
+                                {{ form_widget(vueFormulaireStage.entreprises.urlsite) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:3px solid green; margin-bottom:25px;">
+                        <div class="row" style="color:green; margin-bottom:50px; margin-top:25px; margin-left:25px;">
+                            <div class="offset-md-1 col-md-6">
+                                Formations concernées par le stage :                           
+                            </div>
+                            <div class="offset-md-1 col-md-10">
+                                {{ form_errors(vueFormulaireStage.formations) }}
+                                <BR>
+                                {{ form_widget(vueFormulaireStage.formations) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-7 col-md-4">
+                            <button type="submit" class="btn btn-dark" style="color:green;"> Valider </button>
+                        </div>
+                    </div>
+                {{ form_end ( vueFormulaireStage )}}
+            </div>
         </div>    
     </div>
 

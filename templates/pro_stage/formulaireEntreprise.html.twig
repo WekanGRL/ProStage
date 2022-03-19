@@ -1,17 +1,58 @@
 {% extends 'base.html.twig' %}
-{% block contenu %}
-        <h1> AJOUT D'UNE ENTREPRISE </h1>
+{% block contenu %}       
 
     <div class="row">
-        <div class="col-md-12">
-            {{ form_start ( vueFormulaireEntreprise, { 'attr': { 'novalidate': 'novalidate' }} ) }}
-                {{ form_row ( vueFormulaireEntreprise.nom )}}
-                {{ form_row ( vueFormulaireEntreprise.activite )}}
-                {{ form_row ( vueFormulaireEntreprise.adresse )}}
-                {{ form_row ( vueFormulaireEntreprise.urlsite )}}
-                <button type="submit" class="btn btn-dark"> Valider </button>
-            {{ form_end ( vueFormulaireEntreprise )}}
-
+        <div class="col-md-2 offset-md-5" style="color:green; font-size:25px; margin-bottom:25px;">
+            <u><b> Ajout d'une entreprise </b></u>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-6">            
+            <div style="border:5px solid green; padding:50px; color:green;">        
+                {{ form_start ( vueFormulaireEntreprise) }}
+                    <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                        <div class="offset-md-1 col-md-3">
+                                Nom de l'entreprise :
+                        </div>
+                        <div class="offset-md-1 col-md-3">
+                            {{ form_errors(vueFormulaireEntreprise.nom) }}
+                            {{ form_widget(vueFormulaireEntreprise.nom) }}
+                        </div>
+                    </div>
+                    <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                        <div class="offset-md-1 col-md-3">
+                            Activité de l'entreprise :
+                        </div>
+                        <div class="offset-md-1 col-md-3">
+                            {{ form_errors(vueFormulaireEntreprise.activite) }}
+                            {{ form_widget(vueFormulaireEntreprise.activite) }}
+                        </div>
+                    </div>
+                    <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                        <div class="offset-md-1 col-md-3">
+                            Adresse de l'entreprise :
+                        </div>
+                        <div class="offset-md-1 col-md-3">
+                            {{ form_errors(vueFormulaireEntreprise.adresse) }}
+                            {{ form_widget(vueFormulaireEntreprise.adresse) }}
+                        </div>
+                    </div>
+                    <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                        <div class="offset-md-1 col-md-3">
+                            URL du site de l'entreprise :                            
+                        </div>
+                        <div class="offset-md-1 col-md-3">
+                            {{ form_errors(vueFormulaireEntreprise.urlsite) }}
+                            {{ form_widget(vueFormulaireEntreprise.urlsite) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-7 col-md-4">
+                            <button type="submit" class="btn btn-dark" style="color:green;"> Valider </button>
+                        </div>
+                    </div>
+                {{ form_end ( vueFormulaireEntreprise )}}
+            </div>
         </div>    
     </div>
 
