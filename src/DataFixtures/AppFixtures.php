@@ -17,12 +17,19 @@ class AppFixtures extends Fixture
     {
 
         /* Création de nouveaux utilisateurs */
+
         $momo = new User;
         $momo->setUsername('momo');
         $momo->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
         $momo->setPassword('$2y$10$Ok1Dmf8fFRt9Y0hp.Svvtu72NHAH8P0foEA2ZZegZdatDWKO5F8qm');
         $manager->persist($momo);
-        
+
+        $toto = new User;
+        $toto->setUsername('toto');
+        $toto->setRoles(['ROLE_USER']);
+        $toto->setPassword('$2y$10$sPu2EwoCkOo97dx1TBByxu.pe9bEv0QJ2.Q3p/Yz/Ut7Z8wvw/xj6');
+        $manager->persist($toto);
+
         // Création d'un générateur de données avec Faker
         $faker = \Faker\Factory::create('fr_FR');
 
