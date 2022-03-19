@@ -159,7 +159,7 @@ class ProStageController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter/stage", name="pro_stage_nouveau_stage")
+     * @Route("ajouter/stage", name="pro_stage_nouveau_stage")
      */
     public function ajouterStage(Request $requeteHttp, EntityManagerInterface $manager): Response
     {
