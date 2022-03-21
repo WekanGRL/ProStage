@@ -42,6 +42,16 @@
                         </div>
                     </div>
                     <BR>
+                    <div class="row">
+                        <div class="col-md-2 offset-md-8">
+                            {% if is_granted('ROLE_USER') %}
+                                <a href="{{path('pro_stage_logout')}}"> Se déconnecter </a>                            
+                            {% else %}
+                                <a href="{{path('pro_stage_login')}}"> Se Connecter </a>  
+                            {% endif %}
+                        </div>
+                    </div>
+                    <BR>
                 </div>
             <BR>
         </header>
