@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}       
+
+    <div class="row">
+        <div class="col-md-2 offset-md-5" style="color:green; font-size:25px; margin-bottom:25px;">
+            <u><b> Inscription </b></u>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-6">            
+            <div style="border:5px solid green; padding:50px; color:green;">        
+                {{ form_start ( vueFormulaireInscription) }}
+                    <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                        <div class="offset-md-1 col-md-3">
+                                Username :
+                        </div>
+                        <div class="offset-md-1 col-md-3">
+                            {{ form_errors(vueFormulaireInscription.username) }}
+                            {{ form_widget(vueFormulaireInscription.username) }}
+                        </div>
+                    </div>
+                    <div class="row" style="color:green; margin-bottom:50px; margin-left:25px;">
+                        <div class="offset-md-1 col-md-3">
+                            Password :
+                        </div>
+                        <div class="offset-md-1 col-md-3">
+                            {{ form_errors(vueFormulaireInscription.password) }}
+                            {{ form_widget(vueFormulaireInscription.password) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-7 col-md-4">
+                            <button type="submit" class="btn btn-dark" style="color:green;"> Valider </button>
+                        </div>
+                    </div>
+                {{ form_end ( vueFormulaireInscription )}}
+            </div>
+        </div>    
+    </div>
+
+{% endblock %}
