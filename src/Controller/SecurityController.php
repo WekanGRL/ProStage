@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
             //$manager->flush();
         
             // Rediriger l’utilisateur vers la page affichant la liste des stages
-            //return $this->redirectToRoute('pro_stage_accueil');
+            return $this->redirectToRoute('pro_stage_accueil');
         }
 
         // Afficher le formulaire dédié à un stage   
