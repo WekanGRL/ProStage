@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block contenu %}
-    <h1> Détails de : {{formation.nomCourt}} </h1>
+    <h1>Nouvelle formation </h1>
     {{ include('formation/_form.html.twig') }}
 
     <a href="{{ path('formation_index') }}">Retour à la liste</a>
