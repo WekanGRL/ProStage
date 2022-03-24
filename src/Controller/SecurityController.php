@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -41,29 +42,35 @@ class SecurityController extends AbstractController
     /**
      * @Route("/inscription", name="app_inscription")
      */
-    public function inscription(Request $requeteHttp, EntityManagerInterface $manager): Response
+    public function inscription(Request $requeteHttp, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
-        // Créer un utilisateur vide        
+        // Créer un user vide        
         $user = new User();
 
-        // Création d'un objet formulaire pour récupérer les données saisies par l'utilisateur
+        // Création d'un objet formulaire pour récupérer les données saisies par l'user
         $formUser = $this->createForm(UserType::class, $user);
 
         // Récupération de la requête HTTP
         $formUser->handleRequest($requeteHttp);
 
-        // Traiter les données du formulaire s'il a été soumis
-        if($formUser->isSubmitted() && $formUser->isValid()){
-            // Enregistrer le stage en BD
-            //$manager->persist ($user);
-            //$manager->flush();
-        
-            // Rediriger l’utilisateur vers la page affichant la liste des stages
-            return $this->redirectToRoute('pro_stage_accueil');
+        if ($formUser->isSubmitted() && $formUser->isValid())
+        {
+            // Attribuer un rôle à l'user
+            $user->setRoles(['ROLE_USER']);
+
+            //Encoder le mot de passe de l'user
+            $encodagePassword = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encodagePassword);
+
+            // Enregistrer l'user en base de données
+            $manager->persist($user);
+            $manager->flush();
+
+            // Rediriger l'user vers la page de login
+            return $this->redirectToRoute('app_login');
         }
 
-        // Afficher le formulaire dédié à un stage   
-        return $this->render('pro_stage/formulaireInscription.html.twig',
-                            ['vueFormulaireInscription' => $formUser->createView()]);
+        // Afficher la page présentant le formulaire d'inscription
+        return $this->render('security/formulaireInscription.html.twig',['vueFormulaireInscription' => $formUser->createView()]);
     }
 }
